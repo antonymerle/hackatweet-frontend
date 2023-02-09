@@ -1,0 +1,28 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: left;
+  background-color: pink;
+}
+
+.left {
+  background-color: aqua;
+  flex-basis: 40%;
+  background-image: url("../public/happening.png");
+  background-position: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  background-color: black;
+  flex-basis: 60%;
+}
+
+.logo {
+  background-image: url("../public/logo.png");
+  width: 30%;
+  height: fit-content;
+}

@@ -14,7 +14,6 @@ import {
 import user from "../reducers/user";
 import tweets from "@/reducers/tweets";
 import trends from "@/reducers/trends";
-import Home from "@/components/Home";
 
 const reducers = combineReducers({ user, tweets, trends });
 const persistConfig = { key: "hackatweet", storage };
