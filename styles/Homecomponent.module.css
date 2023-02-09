@@ -60,3 +60,75 @@
   color: white;
   border: 1px solid white;
 }
+
+/* CENTER-COLUMN > TWEET SECTION */
+
+.newTweetContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+}
+
+.inputContainer {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: baseline;
+  width: 100%;
+  padding: 2rem 2rem 2rem 3rem;
+}
+
+.tweetInput {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 2rem;
+  outline: none;
+  background-color: var(--bgDark);
+  border: none;
+  border-bottom: 1px solid rgb(77, 77, 77);
+  color: #fff;
+}
+
+.fireTweet {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: smaller;
+}
+
+.fireTweet p {
+  margin-right: 1rem;
+}
+
+.tweetBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: var(--twitterBlue);
+  font-family: "MontHeavy";
+  color: #fff;
+  border: 1px solid rgb(77, 77, 77);
+  outline: none;
+}
+
+.tweetBtnDisabled {
+  width: 100px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: gray;
+  font-family: "MontHeavy";
+  color: #fff;
+  border: 1px solid rgb(77, 77, 77);
+  outline: none;
+}
+
+.tweetBtn:hover {
+  background-color: rgba(69, 180, 255, 1);
+}
+
+.tweetTooLong {
+  color: red;
+}
