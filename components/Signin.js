@@ -11,13 +11,15 @@ function Signin() {
       </div>
 
       <div className={styles.right}>
-        <div className={styles.logoSmall}></div>
-        <h1>See what's happening</h1>
-        <h2>Join Hackatweet today</h2>
-        <div className={styles.signContainer}>
-          <button>Sign up</button>
-          <p>Already have an account ?</p>
-          <button>Sign in</button>
+        <div className={styles.rightContainer}>
+          <Image src={logo} width={50}></Image>
+          <h1>See what's happening</h1>
+          <h2>Join Hackatweet today</h2>
+          <div className={styles.signContainer}>
+            <button className={styles.signup}>Sign up</button>
+            <h3>Already have an account ?</h3>
+            <button className={styles.signin}>Sign in</button>
+          </div>
         </div>
       </div>
     </main>

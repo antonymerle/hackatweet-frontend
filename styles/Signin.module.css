@@ -19,10 +19,61 @@
 .right {
   background-color: black;
   flex-basis: 60%;
+  padding: 2rem;
+}
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 60%;
+  height: 80%;
 }
 
 .logo {
   background-image: url("../public/logo.png");
   width: 30%;
   height: fit-content;
+  padding-bottom: 12rem;
+}
+
+.logoSmall {
+  background-image: url("../public/logo.png");
+  width: 10%;
+  height: fit-content;
+}
+
+.signContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 20%;
+  min-height: 100px;
+}
+
+.signup {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: var(--twitterBlue);
+  font-family: "MontHeavy";
+  color: #fff;
+}
+
+.signup:hover {
+  background-color: rgba(69, 180, 255, 1);
+}
+.signin:hover {
+  background-color: rgb(235, 241, 245, 0.2);
+}
+
+.signin {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: black;
+  font-family: "MontHeavy";
+  color: var(--twitterBlue);
+  border: 1px solid white;
 }
