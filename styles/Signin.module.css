@@ -52,7 +52,7 @@
   min-height: 100px;
 }
 
-.signup {
+.signupBtn {
   width: 200px;
   height: 40px;
   border-radius: 30px;
@@ -61,14 +61,14 @@
   color: #fff;
 }
 
-.signup:hover {
+.signupBtn:hover {
   background-color: rgba(69, 180, 255, 1);
 }
-.signin:hover {
+.signinBtn:hover {
   background-color: rgb(235, 241, 245, 0.2);
 }
 
-.signin {
+.signinBtn {
   width: 200px;
   height: 40px;
   border-radius: 30px;
@@ -76,4 +76,74 @@
   font-family: "MontHeavy";
   color: var(--twitterBlue);
   border: 1px solid white;
+}
+
+.signupModalBtn {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: white;
+  font-family: "MontHeavy";
+  color: black;
+  border: 1px solid white;
+  margin: 0.5rem;
+}
+
+.modalContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  padding: 30px;
+}
+
+.closeModal {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  z-index: 20;
+}
+.closeModal p {
+  margin: 0rem 2rem 2rem 0rem;
+  color: white;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  background-color: rgb(32, 32, 32);
+  width: 400px;
+  height: 500px;
+  border-radius: 10px;
+  padding: 2rem;
+  /* z-index: 10; */
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 4rem;
+}
+.modalInput {
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  margin: 0.5rem;
 }
