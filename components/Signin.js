@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../styles/Signin.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
-import { Modal } from "antd";
+//import { Modal } from "antd";
 
 function Signin() {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -31,18 +31,41 @@ function Signin() {
   };
 
   const handleSignup = () => {
-    console.log("SIGNUP:", { signUpFirstname, signUpUsername, signUpPassword });
     setSignUpFirstname("");
     setSignUpUsername("");
     setSignUpPassword("");
-    // TODO : FETCH ROUTE SIGNUP USER
+
+    fetch("https://hackatweet-backend-iota.vercel.app/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstname: signUpFirstname,
+        username: signUpUsername,
+        password: signUpPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.result);
+      });
   };
 
   const handleSignin = () => {
-    console.log("SIGNIN:", { signInUsername, signInPassword });
     setSignInUsername("");
     setSignInPassword("");
-    // TODO : FETCH ROUTE SIGNIN USER
+
+    fetch("https://hackatweet-backend-iota.vercel.app/users/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: signInUsername,
+        password: signInPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.result, data.error);
+      });
   };
 
   const signupModal = (
@@ -77,7 +100,10 @@ function Signin() {
             value={signUpPassword}
             className={styles.modalInput}
           />
-          <button className={styles.signupModalBtn} onClick={handleSignup}>
+          <button
+            className={styles.signupModalBtn}
+            onClick={() => handleSignup()}
+          >
             Sign up
           </button>
         </div>
@@ -109,7 +135,10 @@ function Signin() {
             value={signInPassword}
             className={styles.modalInput}
           />
-          <button className={styles.signupModalBtn} onClick={handleSignin}>
+          <button
+            className={styles.signupModalBtn}
+            onClick={() => handleSignin()}
+          >
             Sign in
           </button>
         </div>
@@ -133,11 +162,17 @@ function Signin() {
 
             {isSigninModalOpen && signinModal}
 
-            <button className={styles.signupBtn} onClick={showSignupModal}>
+            <button
+              className={styles.signupBtn}
+              onClick={() => showSignupModal()}
+            >
               Sign up
             </button>
             <h3>Already have an account ?</h3>
-            <button className={styles.signinBtn} onClick={showSigninModal}>
+            <button
+              className={styles.signinBtn}
+              onClick={() => showSigninModal()}
+            >
               Sign in
             </button>
           </div>
