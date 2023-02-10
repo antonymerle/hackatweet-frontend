@@ -55,7 +55,7 @@ function Home() {
         username={element.username}
         likes={element.likesNumber}
         key={i}
-        tweetId={element.tweetId}
+        tweetId={element._id}
         tweetDate={new Date().getTime()}
       />
     );

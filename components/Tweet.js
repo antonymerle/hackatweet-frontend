@@ -8,10 +8,11 @@ import { useSelector } from "react-redux";
 
 function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
   /* CREATION USE SELECTOR */
-  const user = useSelector((state) => state.user.value);
+/*   const user = useSelector((state) => state.user.value);
   const infosTweet = useSelector((state) => state.tweets.value);
 
-  console.log('infosTweet :',infosTweet);
+  console.log('infosTweet :',infosTweet); */
+
   /* DELETE D'UN TWEET */
 
   const deleteTweet = () => {
@@ -19,8 +20,8 @@ function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: user.username,
-        tweetId: infosTweet._id,
+        username: username,
+        tweetId: tweetId,
       }),
     })
       .then((response) => response.json())
