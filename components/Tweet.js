@@ -4,13 +4,16 @@ import egg from "../public/egg.jpg";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-import { removeTweet } from "@/reducers/tweets";
+import { useDispatch, useSelector } from "react-redux";
+import { removeTweet, likeTweet } from "@/reducers/tweets";
 
 function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
   const dispatch = useDispatch();
   /* CREATION USE SELECTOR */
-  /*   const user = useSelector((state) => state.user.value);
+  const connectedUser = useSelector((state) => state.user.value);
+  console.log({ connectedUser });
+
+  /*   
   const infosTweet = useSelector((state) => state.tweets.value);
 
   console.log('infosTweet :',infosTweet); */
@@ -33,6 +36,27 @@ function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
       });
   };
 
+  const handleLike = () => {
+    // const tweetId = req.body.tweetId;
+    // const likerId = connectedUser._id;
+    console.log("enter handlelike");
+
+    fetch(`https://hackatweet-backend-iota.vercel.app/tweets`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        likerId: connectedUser._id,
+        tweetId: tweetId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("handleLike", data);
+        // handleLike {liked: true, numberOfLikes: 1}
+        // dispatch(likeTweet({ tweetId }));
+      });
+  };
+
   return (
     <div className={styles.tweet}>
       <div className={styles.tweetHeader}>
@@ -46,8 +70,12 @@ function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
       <div className={styles.tweetContent}>{content}</div>
       <div className={styles.tweetFooter}>
         <div className={styles.likes}>
-          <FontAwesomeIcon icon={faHeart} className={styles.heart} />
-          <span>1</span>
+          <FontAwesomeIcon
+            icon={faHeart}
+            className={styles.heart}
+            onClick={handleLike}
+          />
+          <span>{likes}</span>
         </div>
         <div className={styles.delete}>
           <FontAwesomeIcon
