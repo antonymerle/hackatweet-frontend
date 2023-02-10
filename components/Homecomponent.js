@@ -4,19 +4,37 @@ import styles from "../styles/Homecomponent.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
 import egg from "../public/egg.jpg";
+import { useSelector } from 'react-redux';
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
 
-  const handleLogout = () => {
+  const user = useSelector((state) => state.user.value);
+
+  console.log('utilisateur : ',user);
+
+  const handleLogout = () => { //deconnexion
     console.log("LOGOUT:", {});
     // TODO : reset store redux
   };
 
   const handleTweet = () => {
     if (!tweetTooLong()) {
-      // TODO : POST tweet to backend
-      console.log("TWEET:", {});
+     
+      fetch (`https://hackatweet-backend-iota.vercel.app/tweets/createTweet`,{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content:tweetContent,
+          username:user.username,
+          avatar:user.avatar,
+        })
+      })
+      .then (response =>response.json())
+      .then (data=>{
+        console.log("TWEET:", {data});
+      })
+
     } else {
       console.log("TWEET TO LONG");
     }

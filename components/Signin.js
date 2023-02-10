@@ -3,9 +3,14 @@ import { useState } from "react";
 import styles from "../styles/Signin.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
-//import { Modal } from "antd";
+import { useDispatch } from "react-redux";
+import { signUp, signIn } from "../reducers/user";
+import { Redirect } from 'react-router-dom';
+
 
 function Signin() {
+  const dispatch = useDispatch();
+
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
   const [signUpFirstname, setSignUpFirstname] = useState("");
@@ -13,6 +18,7 @@ function Signin() {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const showSignupModal = () => {
     setIsSignupModalOpen(true);
@@ -46,7 +52,12 @@ function Signin() {
     })
       .then((response) => response.json())
       .then((data) => {
+        dispatch(signUp(data.data));
+        console.log("dispatch OK", data);
         console.log(data.result);
+        if (data.result) {
+        setIsLoggedIn(true);        
+        }
       });
   };
 
@@ -65,7 +76,7 @@ function Signin() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.result, data.error);
-      }); //commentaire
+      });
   };
 
   const signupModal = (
@@ -145,6 +156,10 @@ function Signin() {
       </div>
     </div>
   );
+
+/*   if (isLoggedIn) {
+    return <Redirect to="/" />;
+  } */
 
   return (
     <main id="main" className={styles.main}>
