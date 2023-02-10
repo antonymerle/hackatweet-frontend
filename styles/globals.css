@@ -1,6 +1,7 @@
 :root {
   --twitterBlue: #1d9bf0;
   --bgDark: #151d27;
+  --bgligtherDark: #1b232c;
 }
 
 @font-face {
@@ -30,6 +31,12 @@ h3 {
   font-size: 1rem;
 }
 
+h4,
+h5 {
+  font-family: "MontHeavy", sans-serif;
+  font-size: 1rem;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -37,15 +44,6 @@ h3 {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  height: 100vh;
-
-  display: grid;
-  grid-template-areas:
-    "header header header"
-    "nav content sidebar"
-    "nav footer footer";
-  grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 80px 1fr 70px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
 }

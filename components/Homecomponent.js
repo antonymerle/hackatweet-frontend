@@ -28,6 +28,7 @@ function Home() {
 
   return (
     <main className={styles.container}>
+      {/* USER COLUMN */}
       <section className={styles.leftColumn}>
         <Image src={logo} width={50} alt="Logo" />
         <div className={styles.userSection}>
@@ -43,6 +44,8 @@ function Home() {
           </button>
         </div>
       </section>
+
+      {/* TWEET COLUMN */}
       <section className={styles.centerColumn}>
         <div className={styles.newTweetContainer}>
           <h3>Home</h3>
@@ -72,7 +75,42 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.rightColumn}>rightColumn</section>
+      {/* TRENDS COLUMN */}
+      <section className={styles.rightColumn}>
+        <h3>Trends</h3>
+        <div className={styles.trendsContainer}>
+          <ol className={styles.trendsList}>
+            <li className={styles.trend}>
+              <h5>
+                {" "}
+                <span className={styles.hashtag}>#</span>hackatweet
+              </h5>
+              <p>
+                <span>2</span> Tweets
+              </p>
+            </li>
+            <li className={styles.trend}>
+              {" "}
+              <h5>
+                <span className={styles.hashtag}>#</span>first
+              </h5>
+              <p>
+                <span>1</span> Tweet
+              </p>
+            </li>
+            <li className={styles.trend}>
+              {" "}
+              <h5>
+                {" "}
+                <span className={styles.hashtag}>#</span>cenation
+              </h5>
+              <p>
+                <span>1</span> Tweet
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
     </main>
   );
 }
