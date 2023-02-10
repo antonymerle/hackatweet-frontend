@@ -44,7 +44,6 @@ function Signin() {
     setSignUpPassword("");
 
     closeSignupModal();
-    router.push("/home");
 
     fetch("https://hackatweet-backend-iota.vercel.app/users/signup", {
       method: "POST",
@@ -62,6 +61,7 @@ function Signin() {
         console.log(data.result);
         if (data.result) {
           setIsLoggedIn(true);
+          router.push("/home");
         }
       });
   };
@@ -69,8 +69,6 @@ function Signin() {
   const handleSignin = () => {
     setSignInUsername("");
     setSignInPassword("");
-    closeSigninModal();
-    router.push("/home");
 
     fetch("https://hackatweet-backend-iota.vercel.app/users/signin", {
       method: "POST",
@@ -82,6 +80,14 @@ function Signin() {
     })
       .then((response) => response.json())
       .then((data) => {
+        // dispatch(signIn(data.data)); //TODO reducer à faire
+        console.log("signin result :", data);
+        if (data.result) {
+          setIsLoggedIn(true);
+          closeSigninModal();
+          router.push("/home");
+        }
+
         console.log(data.result, data.error);
       });
   };
