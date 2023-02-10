@@ -8,24 +8,25 @@ export const tweetsSlice = createSlice({
   name: "tweets",
   initialState,
   reducers: {
+    fetchAllTweets: (state, action) => {
+      state.value = [...action.payload];
+    },
     addTweet: (state, action) => {
       state.value.push(action.payload);
-    },
-    deleteTweet: (state, action) => {
-      state.value = state.value.filter(
-        (bookmark) => bookmark.title !== action.payload.title
-      );
     },
     likeTweet: (state, action) => {
       state.value = state.value.filter(
         (bookmark) => bookmark.title !== action.payload.title
       );
     },
-    removeAllBookmark: (state) => {
-      state.value = [];
+    removeTweet: (state, action) => {
+      state.value = state.value.filter(
+        (tweet) => tweet._id != action.payload.tweetId
+      );
     },
   },
 });
 
-export const { addTweet, deleteTweet, likeTweet } = tweetsSlice.actions;
+export const { addTweet, removeTweet, likeTweet, fetchAllTweets } =
+  tweetsSlice.actions;
 export default tweetsSlice.reducer;

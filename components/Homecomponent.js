@@ -4,15 +4,20 @@ import styles from "../styles/Homecomponent.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
 import egg from "../public/egg.jpg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Tweet from "./Tweet";
+import { fetchAllTweets } from "@/reducers/tweets";
 
 function Home() {
+  const dispatch = useDispatch();
   /*  CREATION DES STATES */
 
   const [tweetContent, setTweetContent] = useState("");
   const [lastTweetCreate, setLastTweetCreate] = useState({});
-  const [allTweets, setAllTweets] = useState([]);
+  // const [allTweets, setAllTweets] = useState([]);
+
+  const allTweets = useSelector((state) => state.tweets.value);
+  console.log({ allTweets });
 
   /* CREATION USE SELECTOR */
   const user = useSelector((state) => state.user.value);
@@ -43,7 +48,7 @@ function Home() {
       .then((data) => {
         console.log(data.results);
 
-        setAllTweets(data.results);
+        dispatch(fetchAllTweets(data.results));
       });
   }, [lastTweetCreate]);
 
@@ -83,7 +88,7 @@ function Home() {
               firstname: data.newTweet.firstname,
               username: data.newTweet.username,
               likes: data.newTweet.like,
-              tweetId:data.newTweet._id
+              tweetId: data.newTweet._id,
             });
           }
         });
@@ -93,8 +98,6 @@ function Home() {
 
     setTweetContent(""); //Remise à zero du tweetContent
   };
-
-
 
   /*  VERIF DE LA TAILLE DU TWEET */
   const tweetTooLong = () => {
