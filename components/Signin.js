@@ -65,7 +65,7 @@ function Signin() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.result, data.error);
-      });
+      }); //commentaire
   };
 
   const signupModal = (
