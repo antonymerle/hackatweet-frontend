@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "../styles/Homecomponent.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
 import egg from "../public/egg.jpg";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Tweet from "./Tweet";
 
 function Home() {
+  /*  CREATION DES STATES */
+
   const [tweetContent, setTweetContent] = useState("");
-  const [lastTweetCreate, setLastTweetCreate]= useState({})
+  const [lastTweetCreate, setLastTweetCreate] = useState({});
+  const [allTweets, setAllTweets] = useState([]);
+
+  /* CREATION USE SELECTOR */
   const user = useSelector((state) => state.user.value);
 
+  /* CREATION D'UN MODEL TWEET */
 
-  
   const tweets = [
     <Tweet
       content={lastTweetCreate.content}
@@ -21,52 +26,81 @@ function Home() {
       username={lastTweetCreate.username}
       likes={lastTweetCreate.likesNumber}
       tweetDate={new Date().getTime()}
-    />
-
+    />,
   ];
 
-
+  /*  FONCTION DE DECONNEXION */
   const handleLogout = () => {
     console.log("LOGOUT:", {});
     // TODO : reset store redux
   };
 
+  /* VU DE TOUS LES TWEETS */
+
+  useEffect(() => {
+    fetch("https://hackatweet-backend-iota.vercel.app/tweets/viewTweet")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.results);
+
+        setAllTweets(data.results);
+      });
+  }, [lastTweetCreate]);
+
+  const tweetsDisplay = allTweets.map((element, i) => {
+    return (
+      <Tweet
+        content={element.content}
+        firstname={element.firstname}
+        username={element.username}
+        likes={element.likesNumber}
+        key={i}
+        tweetDate={new Date().getTime()}
+      />
+    );
+  });
+
+  /* FONCTION AJOUT D'UN TWEET */
+
   const handleTweet = () => {
     if (!tweetTooLong()) {
-     
-      fetch (`https://hackatweet-backend-iota.vercel.app/tweets/createTweet`,{
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      fetch(`https://hackatweet-backend-iota.vercel.app/tweets/createTweet`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          content:tweetContent,
-          username:user.username,
-          avatar:user.avatar,
-        })
+          content: tweetContent,
+          username: user.username,
+          avatar: user.avatar,
+        }),
       })
-      .then (response =>response.json())
-      .then (data=>{
-        console.log("TWEET:", {data});
-          if (data.result){
-            
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("TWEET:", { data });
+          if (data.result) {
             setLastTweetCreate({
-              content:data.newTweet.content,
-              firstname:data.newTweet.firstname,
-              username:data.newTweet.username,
-              likes:data.newTweet.like,
-              //tweetDate:data.newTweet.date,
-
-            })
+              content: data.newTweet.content,
+              firstname: data.newTweet.firstname,
+              username: data.newTweet.username,
+              likes: data.newTweet.like,
+              tweetId:data.newTweet._id
+            });
           }
-      })
-
+        });
     } else {
       console.log("TWEET TO LONG");
     }
+
+    setTweetContent(""); //Remise à zero du tweetContent
   };
 
+
+
+  /*  VERIF DE LA TAILLE DU TWEET */
   const tweetTooLong = () => {
     return tweetContent.length > 280;
   };
+
+  /*  RETURN */
 
   return (
     <main className={styles.container}>
@@ -77,8 +111,8 @@ function Home() {
           <div className={styles.userContainer}>
             <Image src={egg} width={50} alt="pp" className={styles.pp} />
             <div className={styles.usernameContainer}>
-              <h4>John</h4>
-              <h5>@JohnCena</h5>
+              <h4>{user.firstname}</h4>
+              <h5>{user.username}</h5>
             </div>
           </div>
           <button className={styles.logoutBtn} onClick={handleLogout}>
@@ -118,8 +152,9 @@ function Home() {
           </div>
         </div>
         {/* TWEET COLUMN > FEED*/}
-        
-        <div className={styles.feed}>{tweets}</div>
+
+        <div className={styles.feed}>{tweetsDisplay}</div>
+        {/*  {allTweets} */}
       </section>
       {/* TRENDS COLUMN */}
       <section className={styles.rightColumn}>

@@ -4,8 +4,31 @@ import egg from "../public/egg.jpg";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
-function Tweet({ firstname, username, tweetDate, content, likes }) {
+function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
+  /* CREATION USE SELECTOR */
+  const user = useSelector((state) => state.user.value);
+  const infosTweet = useSelector((state) => state.tweets.value);
+
+  console.log('infosTweet :',infosTweet);
+  /* DELETE D'UN TWEET */
+
+  const deleteTweet = () => {
+    fetch(`https://hackatweet-backend-iota.vercel.app/tweets/deleteTweet`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: user.username,
+        tweetId: infosTweet._id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("clg line 31 : ", data.result);
+      });
+  };
+
   return (
     <div className={styles.tweet}>
       <div className={styles.tweetHeader}>
@@ -19,11 +42,15 @@ function Tweet({ firstname, username, tweetDate, content, likes }) {
       <div className={styles.tweetContent}>{content}</div>
       <div className={styles.tweetFooter}>
         <div className={styles.likes}>
-          <FontAwesomeIcon icon={faHeart} />
+          <FontAwesomeIcon icon={faHeart} className={styles.heart} />
           <span>1</span>
         </div>
         <div className={styles.delete}>
-          <FontAwesomeIcon icon={faTrashCan} />
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            onClick={deleteTweet}
+            className={styles.trashCan}
+          />
         </div>
       </div>
     </div>
