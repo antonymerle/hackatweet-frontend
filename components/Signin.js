@@ -6,10 +6,12 @@ import logo from "../public/logo.png";
 import { useDispatch } from "react-redux";
 import { signUp, signIn } from "../reducers/user";
 //import { Redirect } from 'react-router-dom';
-
+import { useRouter } from "next/router";
 
 function Signin() {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
@@ -41,6 +43,9 @@ function Signin() {
     setSignUpUsername("");
     setSignUpPassword("");
 
+    closeSignupModal();
+    router.push("/home");
+
     fetch("https://hackatweet-backend-iota.vercel.app/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,7 +61,7 @@ function Signin() {
         console.log("dispatch OK", data);
         console.log(data.result);
         if (data.result) {
-        setIsLoggedIn(true);        
+          setIsLoggedIn(true);
         }
       });
   };
@@ -64,6 +69,8 @@ function Signin() {
   const handleSignin = () => {
     setSignInUsername("");
     setSignInPassword("");
+    closeSigninModal();
+    router.push("/home");
 
     fetch("https://hackatweet-backend-iota.vercel.app/users/signin", {
       method: "POST",
@@ -157,7 +164,7 @@ function Signin() {
     </div>
   );
 
-/*   if (isLoggedIn) {
+  /*   if (isLoggedIn) {
     return <Redirect to="/" />;
   } */
 
