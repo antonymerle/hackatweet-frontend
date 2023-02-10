@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from "../public/logo.png";
 import egg from "../public/egg.jpg";
 import { useSelector } from 'react-redux';
+import Tweet from "./Tweet";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
@@ -14,6 +15,45 @@ function Home() {
   console.log('utilisateur : ',user);
 
   const handleLogout = () => { //deconnexion
+  const tweets = [
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+  ];
+
+  const handleLogout = () => {
     console.log("LOGOUT:", {});
     // TODO : reset store redux
   };
@@ -46,6 +86,7 @@ function Home() {
 
   return (
     <main className={styles.container}>
+      {/* USER COLUMN */}
       <section className={styles.leftColumn}>
         <Image src={logo} width={50} alt="Logo" />
         <div className={styles.userSection}>
@@ -61,7 +102,10 @@ function Home() {
           </button>
         </div>
       </section>
+
+      {/* TWEET COLUMN */}
       <section className={styles.centerColumn}>
+        {/* TWEET COLUMN > NEW TWEET*/}
         <div className={styles.newTweetContainer}>
           <h3>Home</h3>
           <div className={styles.inputContainer}>
@@ -89,10 +133,47 @@ function Home() {
             </div>
           </div>
         </div>
+        {/* TWEET COLUMN > FEED*/}
+        <div className={styles.feed}>{tweets}</div>
       </section>
-      <section className={styles.rightColumn}>rightColumn</section>
+      {/* TRENDS COLUMN */}
+      <section className={styles.rightColumn}>
+        <h3>Trends</h3>
+        <div className={styles.trendsContainer}>
+          <ol className={styles.trendsList}>
+            <li className={styles.trend}>
+              <h5>
+                {" "}
+                <span className={styles.hashtag}>#</span>hackatweet
+              </h5>
+              <p>
+                <span>2</span> Tweets
+              </p>
+            </li>
+            <li className={styles.trend}>
+              {" "}
+              <h5>
+                <span className={styles.hashtag}>#</span>first
+              </h5>
+              <p>
+                <span>1</span> Tweet
+              </p>
+            </li>
+            <li className={styles.trend}>
+              {" "}
+              <h5>
+                {" "}
+                <span className={styles.hashtag}>#</span>cenation
+              </h5>
+              <p>
+                <span>1</span> Tweet
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
     </main>
   );
 }
-
+}
 export default Home;

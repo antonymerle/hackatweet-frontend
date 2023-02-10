@@ -18,15 +18,20 @@
 }
 
 .centerColumn {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
   border-left: 1px solid rgb(77, 77, 77);
   border-right: 1px solid rgb(77, 77, 77);
+  padding: 2rem;
+  overflow: hidden;
 }
 
 .rightColumn {
   width: 25%;
   height: 100%;
+  padding: 2rem;
 }
 
 .userSection {
@@ -68,7 +73,6 @@
   flex-direction: column;
   width: 100%;
   height: 200px;
-  padding: 15px;
 }
 
 .inputContainer {
@@ -131,4 +135,38 @@
 
 .tweetTooLong {
   color: red;
+}
+
+/* CENTER-COLUMN > FEED SECTION */
+
+.feed {
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.feed::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* TRENDS-COLUMN */
+.trendsContainer {
+  background-color: var(--bgligtherDark);
+  margin-top: 2rem;
+  padding: 2rem 1rem 1rem 1rem;
+  border-radius: 10px;
+}
+
+.trendsList {
+  list-style: none;
+}
+
+.hashtag {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.trend {
+  height: 4rem;
+  margin-bottom: 1rem;
 }
