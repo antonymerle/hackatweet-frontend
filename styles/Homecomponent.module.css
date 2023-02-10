@@ -18,11 +18,14 @@
 }
 
 .centerColumn {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
   border-left: 1px solid rgb(77, 77, 77);
   border-right: 1px solid rgb(77, 77, 77);
   padding: 2rem;
+  overflow: hidden;
 }
 
 .rightColumn {
@@ -132,6 +135,19 @@
 
 .tweetTooLong {
   color: red;
+}
+
+/* CENTER-COLUMN > FEED SECTION */
+
+.feed {
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.feed::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 /* TRENDS-COLUMN */

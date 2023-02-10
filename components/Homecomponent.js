@@ -4,9 +4,48 @@ import styles from "../styles/Homecomponent.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
 import egg from "../public/egg.jpg";
+import Tweet from "./Tweet";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
+
+  const tweets = [
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+    <Tweet
+      content={"Hello Twitter"}
+      firstname={"Dylan"}
+      username={"@DylanStagiaire"}
+      likes={2}
+      tweetDate={new Date().getTime()}
+    />,
+  ];
 
   const handleLogout = () => {
     console.log("LOGOUT:", {});
@@ -47,6 +86,7 @@ function Home() {
 
       {/* TWEET COLUMN */}
       <section className={styles.centerColumn}>
+        {/* TWEET COLUMN > NEW TWEET*/}
         <div className={styles.newTweetContainer}>
           <h3>Home</h3>
           <div className={styles.inputContainer}>
@@ -74,6 +114,8 @@ function Home() {
             </div>
           </div>
         </div>
+        {/* TWEET COLUMN > FEED*/}
+        <div className={styles.feed}>{tweets}</div>
       </section>
       {/* TRENDS COLUMN */}
       <section className={styles.rightColumn}>

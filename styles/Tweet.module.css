@@ -1,0 +1,8 @@
+.tweet {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1rem;
+  border-top: 1px solid rgb(77, 77, 77);
+}
