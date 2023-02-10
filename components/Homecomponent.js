@@ -15,6 +15,7 @@ function Home() {
   const [tweetContent, setTweetContent] = useState("");
   const [lastTweetCreate, setLastTweetCreate] = useState({});
   // const [allTweets, setAllTweets] = useState([]);
+  const [hashTags, setHashTags]=useState([])
 
   const allTweets = useSelector((state) => state.tweets.value);
   console.log({ allTweets });
@@ -97,6 +98,16 @@ function Home() {
     return tweetContent.length > 280;
   };
 
+/* useEffect(()=>{
+  fetch(`https://hackatweet-backend-iota.vercel.app/tweets/trends/chuck`)
+  .then (response=>response())
+  .then (data=>{
+      setHashTags(data.results.trend)
+      console.log('hashTags : ',hashTags);
+  })
+  },[]) */
+
+
   /*  RETURN */
 
   return (
@@ -162,19 +173,19 @@ function Home() {
             <li className={styles.trend}>
               <h5>
                 {" "}
-                <span className={styles.hashtag}>#</span>hackatweet
+                <span className={styles.hashtag}>#</span>Chuck
               </h5>
               <p>
-                <span>2</span> Tweets
+                <span>5</span> Tweets
               </p>
             </li>
             <li className={styles.trend}>
               {" "}
               <h5>
-                <span className={styles.hashtag}>#</span>first
+                <span className={styles.hashtag}>#</span>Norris
               </h5>
               <p>
-                <span>1</span> Tweet
+                <span>2</span> Tweet
               </p>
             </li>
             <li className={styles.trend}>
