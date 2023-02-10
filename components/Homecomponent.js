@@ -9,20 +9,21 @@ import Tweet from "./Tweet";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
-
+  const [lastTweetCreate, setLastTweetCreate]= useState({})
   const user = useSelector((state) => state.user.value);
 
   console.log('utilisateur : ',user);
 
-  const handleLogout = () => { //deconnexion
+  
   const tweets = [
     <Tweet
-      content={"Hello Twitter"}
-      firstname={"Dylan"}
-      username={"@DylanStagiaire"}
-      likes={2}
+      content={lastTweetCreate.content}
+      firstname={lastTweetCreate.firstname}
+      username={lastTweetCreate.username}
+      likes={lastTweetCreate.likesNumber}
+      
       tweetDate={new Date().getTime()}
-    />,
+    />/* ,
     <Tweet
       content={"Hello Twitter"}
       firstname={"Dylan"}
@@ -50,8 +51,9 @@ function Home() {
       username={"@DylanStagiaire"}
       likes={2}
       tweetDate={new Date().getTime()}
-    />,
+    />, */
   ];
+
 
   const handleLogout = () => {
     console.log("LOGOUT:", {});
@@ -73,6 +75,17 @@ function Home() {
       .then (response =>response.json())
       .then (data=>{
         console.log("TWEET:", {data});
+          if (data.result){
+            
+            setLastTweetCreate({
+              content:data.newTweet.content,
+              firstname:data.newTweet.firstname,
+              username:data.newTweet.username,
+              likes:data.newTweet.like,
+              //tweetDate:data.newTweet.date,
+
+            })
+          }
       })
 
     } else {
@@ -134,6 +147,7 @@ function Home() {
           </div>
         </div>
         {/* TWEET COLUMN > FEED*/}
+        
         <div className={styles.feed}>{tweets}</div>
       </section>
       {/* TRENDS COLUMN */}
@@ -175,5 +189,5 @@ function Home() {
     </main>
   );
 }
-}
+
 export default Home;
