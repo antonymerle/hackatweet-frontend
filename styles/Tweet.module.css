@@ -22,9 +22,10 @@
 
 .headerText {
   display: flex;
-  width: 40%;
+  width: 30%;
   justify-content: space-around;
   align-items: baseline;
+  color: lightgrey;
 }
 
 .authorUserName {
@@ -49,6 +50,7 @@
   justify-content: space-around;
 }
 
-.trashCan, .heart{
+.trashCan,
+.heart {
   cursor: pointer;
 }

@@ -29,11 +29,11 @@ export const userSlice = createSlice({
       state.value.id = action.payload._id;
       state.value.avatar = action.payload.avatar;
     },
-    logout: (state) => {
+    logoutUser: (state) => {
       state.value = {};
     },
   },
 });
 
-export const { signUp, signInUser, logout } = userSlice.actions;
+export const { signUp, signInUser, logoutUser } = userSlice.actions;
 export default userSlice.reducer;

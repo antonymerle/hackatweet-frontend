@@ -7,9 +7,13 @@ import egg from "../public/egg.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import Tweet from "./Tweet";
 import { fetchAllTweets } from "@/reducers/tweets";
+import { logoutUser } from "@/reducers/user";
+import { useRouter } from "next/router";
 
 function Home() {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   /*  CREATION DES STATES */
 
   const [tweetContent, setTweetContent] = useState("");
@@ -27,6 +31,8 @@ function Home() {
   /*  FONCTION DE DECONNEXION */
   const handleLogout = () => {
     console.log("LOGOUT:", {});
+    dispatch(logoutUser());
+    router.push("/");
     // TODO : reset store redux
   };
 
