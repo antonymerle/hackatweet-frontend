@@ -185,7 +185,7 @@ function Home() {
                 <span className={styles.hashtag}>#</span>Norris
               </h5>
               <p>
-                <span>2</span> Tweet
+                <span>2</span> Tweets
               </p>
             </li>
             <li className={styles.trend}>
