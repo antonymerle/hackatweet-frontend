@@ -24,16 +24,6 @@ function Home() {
 
   /* CREATION D'UN MODEL TWEET */
 
-  const tweets = [
-    <Tweet
-      content={lastTweetCreate.content}
-      firstname={lastTweetCreate.firstname}
-      username={lastTweetCreate.username}
-      likes={lastTweetCreate.likesNumber}
-      tweetDate={new Date().getTime()}
-    />,
-  ];
-
   /*  FONCTION DE DECONNEXION */
   const handleLogout = () => {
     console.log("LOGOUT:", {});
@@ -71,6 +61,7 @@ function Home() {
 
   const handleTweet = () => {
     if (!tweetTooLong()) {
+      setTweetContent("");
       fetch(`https://hackatweet-backend-iota.vercel.app/tweets/createTweet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -83,6 +74,7 @@ function Home() {
         .then((response) => response.json())
         .then((data) => {
           console.log("TWEET:", { data });
+
           if (data.result) {
             setLastTweetCreate({
               content: data.newTweet.content,
@@ -140,6 +132,7 @@ function Home() {
               rows="1"
               className={styles.tweetInput}
               onChange={(e) => setTweetContent(e.target.value)}
+              value={tweetContent}
             ></textarea>
             <div className={styles.fireTweet}>
               <p className={tweetTooLong() && styles.tweetTooLong}>
