@@ -59,6 +59,7 @@ function Home() {
         firstname={element.firstname}
         username={element.username}
         likes={element.likesNumber}
+        likedBy={element.likedBy}
         key={i}
         tweetId={element._id}
         tweetDate={new Date().getTime()}

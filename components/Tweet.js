@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTweet, likeTweet } from "@/reducers/tweets";
+import { useState } from "react";
 
 function Tweet({
   firstname,
@@ -20,6 +21,11 @@ function Tweet({
   /* CREATION USE SELECTOR */
   const connectedUser = useSelector((state) => state.user.value);
   console.log({ connectedUser });
+
+  // const isLikedTweet = likedBy.includes(connectedUser.id);
+  const [isLikedTweet, setIsLikedTweet] = useState(
+    likedBy.includes(connectedUser.id)
+  );
 
   /*   
   const infosTweet = useSelector((state) => state.tweets.value);
@@ -65,6 +71,7 @@ function Tweet({
         console.log("dispatch : ", { ...data, tweetId });
 
         dispatch(likeTweet({ ...data, tweetId }));
+        setIsLikedTweet(!isLikedTweet);
       });
   };
 
@@ -84,6 +91,7 @@ function Tweet({
           <FontAwesomeIcon
             icon={faHeart}
             className={styles.heart}
+            style={{ color: isLikedTweet ? "red" : "white" }}
             onClick={handleLike}
           />
           <span>{likes}</span>
