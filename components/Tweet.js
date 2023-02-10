@@ -7,7 +7,15 @@ import { faHeart, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTweet, likeTweet } from "@/reducers/tweets";
 
-function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
+function Tweet({
+  firstname,
+  username,
+  tweetDate,
+  content,
+  likes,
+  tweetId,
+  likedBy,
+}) {
   const dispatch = useDispatch();
   /* CREATION USE SELECTOR */
   const connectedUser = useSelector((state) => state.user.value);
@@ -42,10 +50,11 @@ function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
     console.log("enter handlelike");
 
     fetch(`https://hackatweet-backend-iota.vercel.app/tweets`, {
+      // fetch(`http://localhost:3000/tweets`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        likerId: connectedUser._id,
+        likerId: connectedUser.id,
         tweetId: tweetId,
       }),
     })
@@ -53,7 +62,9 @@ function Tweet({ firstname, username, tweetDate, content, likes, tweetId }) {
       .then((data) => {
         console.log("handleLike", data);
         // handleLike {liked: true, numberOfLikes: 1}
-        // dispatch(likeTweet({ tweetId }));
+        console.log("dispatch : ", { ...data, tweetId });
+
+        dispatch(likeTweet({ ...data, tweetId }));
       });
   };
 

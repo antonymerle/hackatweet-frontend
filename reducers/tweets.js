@@ -15,9 +15,14 @@ export const tweetsSlice = createSlice({
       state.value.push(action.payload);
     },
     likeTweet: (state, action) => {
-      state.value = state.value.filter(
-        (bookmark) => bookmark.title !== action.payload.title
-      );
+      for (let tweet of state.value) {
+        if (tweet._id == action.payload.tweetId) {
+          tweet.likesNumber = action.payload.numberOfLikes;
+        }
+      }
+      // state.value = state.value.filter(
+      //   (bookmark) => bookmark.title !== action.payload.title
+      // );
     },
     removeTweet: (state, action) => {
       state.value = state.value.filter(
