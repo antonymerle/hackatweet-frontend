@@ -4,7 +4,7 @@ import styles from "../styles/Signin.module.css";
 import Image from "next/image";
 import logo from "../public/logo.png";
 import { useDispatch } from "react-redux";
-import { signUp, signIn } from "../reducers/user";
+import { signUp, signInUser } from "../reducers/user";
 //import { Redirect } from 'react-router-dom';
 import { useRouter } from "next/router";
 
@@ -80,7 +80,7 @@ function Signin() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // dispatch(signIn(data.data)); //TODO reducer à faire
+        dispatch(signInUser(data.data)); //TODO reducer à faire
         console.log("signin result :", data);
         if (data.result) {
           setIsLoggedIn(true);
