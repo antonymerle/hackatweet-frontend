@@ -12,7 +12,6 @@ function Home() {
   const [lastTweetCreate, setLastTweetCreate]= useState({})
   const user = useSelector((state) => state.user.value);
 
-  console.log('utilisateur : ',user);
 
   
   const tweets = [
@@ -21,37 +20,9 @@ function Home() {
       firstname={lastTweetCreate.firstname}
       username={lastTweetCreate.username}
       likes={lastTweetCreate.likesNumber}
-      
       tweetDate={new Date().getTime()}
-    />/* ,
-    <Tweet
-      content={"Hello Twitter"}
-      firstname={"Dylan"}
-      username={"@DylanStagiaire"}
-      likes={2}
-      tweetDate={new Date().getTime()}
-    />,
-    <Tweet
-      content={"Hello Twitter"}
-      firstname={"Dylan"}
-      username={"@DylanStagiaire"}
-      likes={2}
-      tweetDate={new Date().getTime()}
-    />,
-    <Tweet
-      content={"Hello Twitter"}
-      firstname={"Dylan"}
-      username={"@DylanStagiaire"}
-      likes={2}
-      tweetDate={new Date().getTime()}
-    />,
-    <Tweet
-      content={"Hello Twitter"}
-      firstname={"Dylan"}
-      username={"@DylanStagiaire"}
-      likes={2}
-      tweetDate={new Date().getTime()}
-    />, */
+    />
+
   ];
 
 
